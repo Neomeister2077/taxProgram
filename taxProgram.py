@@ -2,16 +2,16 @@
 
 # PURPOSE: Application which extracts financial information from deliveroo 
 # 	   invoices and returns total amount made, total in tips and total paid
-#	   in transaction fees from the invoices in the CWD
+#	   in transaction fees from the invoices specified in the "path" variable
 
-# USAGE: 
+# USAGE: Ensure the correct directory is set in the "path" variable then go nuts. You nut.
 
 # Tax year 18/19 dates  - 6/4/18 - 5/4/19
 import os, PyPDF2, re
 
 # Get a list of all files in directory
 
-path = "/home/snake_charmer/scripts/invoices/"
+path = "INSERT CORRECT DIRECTORY HERE"
 
 pdfName = os.listdir(path)
 
@@ -94,16 +94,6 @@ for i in pdfName:
 		pass
 	actualTotal = round(finalTotal + finalTips - finalTrans, 2)
 	actualTotal1 = round(finalTotal + finalTips + finalTrans, 2)
-	#print(totalResult)
-	#print('Refined Total: ' + refinedTotalResult)
-	#print(round(finalTotal, 2))
-	#print('Count: ' + str(counter))
-	#print('Tips: ' + tipsResult)
-	#print('Refined Tips: ' + refinedTipsResult + '\n\n**********')
-	#print('Tip total: ' + str(finalTips))
-
-	#print(pdfText + "\n\n\n")
-	#print(i)
 
 print('Number of Invoices: ' + str(counter) + '\n')
 print('Fees Total: £' + str(round(finalTotal, 2)) + '\n')
@@ -111,10 +101,5 @@ print('Tips Total: £' + str(round(finalTips, 2)) + '\n')
 print('Transaction Fees Total: £' + str(round(finalTrans, 2)) + '\n\n*********\n')
 print('Total + tips: £' + str(actualTotal))
 print('Total + tips + Transaction fees: £' + str(actualTotal1))
-
-
-# Non prog reminder: Remember to go back and get the values from
-# the very first invoice as the total falls before and after start 
-# date
 
 

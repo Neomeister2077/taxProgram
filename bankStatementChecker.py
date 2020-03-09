@@ -4,7 +4,7 @@
 # 	   the incoives program is correct by checking how much was 
 #	   paid into the bank account from Deliveroo/Uber etc
 
-# USAGE: 
+# USAGE: Ensure the correct directory is set in the "path" variable then go nuts. You nut.
 
 # Tax year 18/19 dates  - 6/4/18 - 5/4/19
 
@@ -12,7 +12,7 @@ import os, PyPDF2, re
 
 # Get a list of all files in directory
 
-path = "/home/snake_charmer/scripts/bankStatements/"
+path = "INSERT CORRECT DIRECTORY HERE"
 
 pdfName = sorted(os.listdir(path))
 
@@ -42,9 +42,6 @@ for pdf in pdfName:
 		for page in range(numberOfPages):
 			pageObj = pdfReader.getPage(page)
 			pdfText = pageObj.extractText()
-			#print('\n\n\n')
-			#print(pdfText)
-			#print('\n\n\n')
 			# Create regex for Deliveroo fee payments
 			rooPaymentRegex = re.compile(r'(BankcreditRoofoodsLimited)([0-9]+\.[0-9]+)')
 			refinedRooPaymentRegex = re.compile(r'[0-9]+\.[0-9]{2}')
@@ -78,18 +75,11 @@ for pdf in pdfName:
 			for i in uberPageFigures:
 				allUberFigures.append(i)
 			intUberFigures = [float(i) for i in allUberFigures]
-			#print(allRooFigures)
-			#print(intRooFigures)
 			counter1 += 1
-			#print('Number of pages: ' + str(numberOfPages))
-			#print('counter: ' + str(counter1))
-			#break
-			# NOTE 24/01/2020: Refine the regex to use groups to 
+			#Note 24/01/2020: Refine the regex to use groups to 
 			# 		   extract the numbers rather than
 			#		   a 2nd regex before Uber part.
 
-
-	#print(intRooFigures)
 	# add up the list of deliveroo payments in a month and round to 2 decimal places
 	rooMonthlyTotal = round(sum(intRooFigures), 2)
 
@@ -113,7 +103,6 @@ for pdf in pdfName:
 	#print('\n' + 'Deliveroo payments: ' + str(allRooFigures) + '\n')
 	print('Uber payments: ' + str(allUberFigures) + '\n')
 	print('Deliveroo total: ' + str(rooMonthlyTotal)+ '\n')
-	#print('Deliveroo total: ' + str(round(sum(intRooFigures), 2))+ '\n')
 	print('Uber total: ' + str(uberFinalTotal) + '\n')
 	print('Total: ' + str(actualTotal + uberFinalTotal))
 
